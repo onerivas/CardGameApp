@@ -1,1 +1,3 @@
 # CardGameApp
+
+### Andre, Juan & Richard
