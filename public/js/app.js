@@ -1,15 +1,12 @@
 class App extends React.Component {
   state = {
     name: '',
-    destination: '',
+    commentName: '',
+    location: '',
+    img: '',
+    description: '',
     posts: [],
-    currentUser: ''
-  }
-  userSignIn = () => {
-    axios.post('/sessions').then(
-      (response) => {
-      console.log(response);
-    })
+    comments: []
   }
   componentDidMount = () => {
     axios.get('/travel').then(
@@ -34,11 +31,14 @@ class App extends React.Component {
   }
   handleSubmit = (event) => {
     event.preventDefault();
+    event.target.reset();
     axios.post('/travel', this.state).then(
       (response) => {
       this.setState({
         name: '',
-        destination: '',
+        location: '',
+        img: '',
+        description: '',
         posts: response.data
       })
     })
@@ -51,34 +51,31 @@ class App extends React.Component {
       this.setState({
         posts: response.data,
         name: '',
-        destination: ''
+        location: '',
+        img: '',
+        description: ''
       })
     })
   }
   render = () => {
     return  <div>
-              {this.currentUser ? 7 : 9}
-              <h2>Log In</h2>
-              <form onSubmit={this.userSignIn}>
-                <label htmlFor="username">Username</label>
-                <br />
-                <input type="text" id="username" onChange={this.handleChange}/>
-                <br />
-                <label htmlFor="password">Password</label>
-                <br />
-                <input type="text" id="password" onChange={this.handleChange}/>
-                <br />
-                <input type="submit" value="LogIn" />
-              </form>
               <h2>Create Post</h2>
               <form onSubmit={this.handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <br />
                 <input type="text" id="name" onChange={this.handleChange}/>
                 <br />
-                <label htmlFor="destination">Destination</label>
+                <label htmlFor="location">Location</label>
                 <br />
-                <input type="text" id="destination" onChange={this.handleChange}/>
+                <input type="text" id="location" onChange={this.handleChange}/>
+                <br />
+                <label htmlFor="img">Image</label>
+                <br />
+                <input type="text" id="img" onChange={this.handleChange}/>
+                <br />
+                <label htmlFor="description">Description</label>
+                <br />
+                <input type="text" id="description" onChange={this.handleChange}/>
                 <br />
                 <input type="submit" value="Create Post" />
               </form>
@@ -87,22 +84,45 @@ class App extends React.Component {
                 { this.state.posts.map((post) => { return(
                   <li key={post._id}>
                   {post.name}<br />
-                  {post.destination}<br />
-                  <button value={post._id} onClick={this.deletePost}>DELETE</button>
-                  <details>
-                    <summary>Edit this post</summary>
+                  {post.location}<br />
+                  <img src={post.img}/><br />
+                  {post.description}<br />
+                  <div className="comments">
+                    <p>Comments</p>
                     <form id={post._id} onSubmit={this.updatePost}>
-                      <label htmlFor="name">Name</label>
+                      <label htmlFor="commentName">Name</label>
                       <br />
-                      <input type="text" id="name" onChange={this.handleChange} value={this.state.name} />
+                      <input type="text" id="commentName" onChange={this.handleChange} value={this.state.commentName} />
                       <br />
-                      <label htmlFor="destination">Destination</label>
+                      <label htmlFor="comment">Comments</label>
                       <br />
-                      <input type="text" id="destination" onChange={this.handleChange} value={this.state.destination} />
-                      <br />
-                      <input type="submit" value="Update Post" />
+                      <input type="text" id="comment" onChange={this.handleChange} value={this.state.comment} />
+                      <input type="submit" value="Add Comment" />
                     </form>
-                  </details>
+                  </div>
+                    <details>
+                      <summary>Edit this post</summary>
+                      <form id={post._id} onSubmit={this.updatePost}>
+                        <label htmlFor="name">Name</label>
+                        <br />
+                        <input type="text" id="name" onChange={this.handleChange} defaultValue={post.name} />
+                        <br />
+                        <label htmlFor="location">Location</label>
+                        <br />
+                        <input type="text" id="location" onChange={this.handleChange} defaultValue={post.location} />
+                        <br />
+                        <label htmlFor="img">Image</label>
+                        <br />
+                        <input type="text" id="img" onChange={this.handleChange} value={post.img} />
+                        <br />
+                        <label htmlFor="description">Description</label>
+                        <br />
+                        <input type="text" id="description" onChange={this.handleChange} defaultValue={post.description} />
+                        <br />
+                        <input type="submit" value="Update Post" />
+                      </form>
+                    </details>
+                  <button value={post._id} onClick={this.deletePost}>DELETE</button>
                   </li>
                 )})}
               </ul>

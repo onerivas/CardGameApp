@@ -1,13 +1,12 @@
 const mongoose = require('mongoose')
-// const User = require('./users.js')
-// const Comment = require('./comment.js')
+const Comment = require('./comments.js')
 
 const postSchema = new mongoose.Schema({
-  name: String,
-  destination: String
-  // img: { type: String, required: true },
-  // comments: [Comment.schema],
-  // author: mongoose.ObjectId
+  name: { type: String, required: true },
+  location: String,
+  img: { type: String, required: true },
+  description: String,
+  comments: [Comment.schema]
 })
 
 const Post = mongoose.model('Post', postSchema)
