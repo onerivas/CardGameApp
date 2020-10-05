@@ -2,7 +2,25 @@ class App extends React.Component {
   state = {
     name: '',
     destination: '',
-    posts: []
+    posts: [],
+    currentUser: ''
+  }
+  userSignIn = () => {
+    axios.post('/sessions', (req, res) => {
+  User.findOne({username:req.body.username}, (err, foundUser) => {
+    if(err){
+      console.log(err);
+    } else if (!foundUser){
+    console.log(req.body.username);
+    } else {
+      if(bcrypt.compareSync(req.body.password, foundUser.password)){
+        this.currentUser = foundUser
+        console.log(req.session.currentUser._id);
+        res.redirect('/')
+      }
+    }
+  })
+})
   }
   componentDidMount = () => {
     axios.get('/travel').then(
@@ -49,7 +67,21 @@ class App extends React.Component {
     })
   }
   render = () => {
-    return  <div>
+    return  (<div>
+      {this.currentUser ? 7 : 9}
+      <h2>Log In</h2>
+      <form onSubmit={this.userSignIn}>
+        <label htmlFor="username">Username</label>
+        <br />
+        <input type="text" id="username" onChange={this.handleChange}/>
+        <br />
+        <label htmlFor="password">Password</label>
+        <br />
+        <input type="text" id="password" onChange={this.handleChange}/>
+        <br />
+        <input type="submit" value="LogIn" />
+      </form>
+
               <h2>Create Post</h2>
               <form onSubmit={this.handleSubmit}>
                 <label htmlFor="name">Name</label>
@@ -86,8 +118,9 @@ class App extends React.Component {
                   </li>
                 )})}
               </ul>
-            </div>
-  }
+              </div>
+
+)  }
 }
 
 ReactDOM.render(
