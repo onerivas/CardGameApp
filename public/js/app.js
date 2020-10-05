@@ -6,21 +6,10 @@ class App extends React.Component {
     currentUser: ''
   }
   userSignIn = () => {
-    axios.post('/sessions', (req, res) => {
-  User.findOne({username:req.body.username}, (err, foundUser) => {
-    if(err){
-      console.log(err);
-    } else if (!foundUser){
-    console.log(req.body.username);
-    } else {
-      if(bcrypt.compareSync(req.body.password, foundUser.password)){
-        this.currentUser = foundUser
-        console.log(req.session.currentUser._id);
-        res.redirect('/')
-      }
-    }
-  })
-})
+    axios.post('/sessions').then(
+      (response) => {
+      console.log(response);
+    })
   }
   componentDidMount = () => {
     axios.get('/travel').then(
@@ -120,6 +109,7 @@ class App extends React.Component {
               </div>
         }
 }
+
 
 ReactDOM.render(
   <App></App>,
