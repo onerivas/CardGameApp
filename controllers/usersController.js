@@ -1,10 +1,9 @@
+const bcrypt = require('bcrypt')
 const express = require('express');
 const users = express.Router();
 const User = require('../models/users.js');
 
-const isAuthorized = (req, res, next) => {
-  req.session.currentUser ? next() : res.redirect('/sessions/new')
-}
+
 
 users.get('/', (req, res) => {
   User.find({}, (err, foundUser) => {
@@ -37,6 +36,21 @@ users.delete('/:id', (req, res) => {
     User.find({}, (err, foundUser) => {
       res.json(foundUser)
     })
+  })
+})
+
+users.get('/new', (req, res) => {
+  res.render('users/new.ejs', {
+    currentUser: req.session.currentUser
+  })
+})
+
+users.post('/', (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+  req.body.role = 'base'
+  User.create(req.body, (err, createdUser) => {
+    console.log('User is created', createdUser);
+    res.redirect('/toolow')
   })
 })
 

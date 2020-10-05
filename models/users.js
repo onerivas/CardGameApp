@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
+const Post = require('./posts.js')
 
 const userSchema = new mongoose.Schema({
-  _id: Schema.Types.ObjectId,
   username: {type: String, unique:true, required: true},
-  name: {type: String, required: true},
+  email: {type: String, required: true},
   password: {type:String, required:true},
-  post:
+  posts: [Post.schema]
 })
 
 const User = mongoose.model('User', userSchema);
