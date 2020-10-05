@@ -4,7 +4,6 @@ const users = express.Router();
 const User = require('../models/users.js');
 
 
-
 users.get('/', (req, res) => {
   User.find({}, (err, foundUser) => {
     res.json(foundUser)

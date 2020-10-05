@@ -67,21 +67,20 @@ class App extends React.Component {
     })
   }
   render = () => {
-    return  (<div>
-      {this.currentUser ? 7 : 9}
-      <h2>Log In</h2>
-      <form onSubmit={this.userSignIn}>
-        <label htmlFor="username">Username</label>
-        <br />
-        <input type="text" id="username" onChange={this.handleChange}/>
-        <br />
-        <label htmlFor="password">Password</label>
-        <br />
-        <input type="text" id="password" onChange={this.handleChange}/>
-        <br />
-        <input type="submit" value="LogIn" />
-      </form>
-
+    return  <div>
+              {this.currentUser ? 7 : 9}
+              <h2>Log In</h2>
+              <form onSubmit={this.userSignIn}>
+                <label htmlFor="username">Username</label>
+                <br />
+                <input type="text" id="username" onChange={this.handleChange}/>
+                <br />
+                <label htmlFor="password">Password</label>
+                <br />
+                <input type="text" id="password" onChange={this.handleChange}/>
+                <br />
+                <input type="submit" value="LogIn" />
+              </form>
               <h2>Create Post</h2>
               <form onSubmit={this.handleSubmit}>
                 <label htmlFor="name">Name</label>
@@ -119,8 +118,7 @@ class App extends React.Component {
                 )})}
               </ul>
               </div>
-
-)  }
+        }
 }
 
 ReactDOM.render(
