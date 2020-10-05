@@ -1,5 +1,4 @@
 //Dependencies
-
 const express =require('express');
 const mongoose = require('mongoose');
 
@@ -34,12 +33,12 @@ mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 app.use(express.json())
 app.use(express.static('public'))
 
-// const usersController = require('./controllers/usersController.js');
-// app.use('/users', usersController)
+const usersController = require('./controllers/usersController.js');
+app.use('/users', usersController)
 const postsController = require('./controllers/postsController.js');
 app.use('/travel', postsController)
-// const sessionsController = require('./controllers/sessionsController.js');
-// app.use('/sessions', sessionsController)
+const sessionsController = require('./controllers/sessionsController.js');
+app.use('/sessions', sessionsController)
 
 
 app.listen(PORT, () => {

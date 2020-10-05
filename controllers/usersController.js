@@ -1,7 +1,7 @@
-// const bcrypt = require('bcrypt')
-// const express = require('express');
-// const users = express.Router();
-// const User = require('../models/users.js');
+const bcrypt = require('bcrypt')
+const express = require('express');
+const users = express.Router();
+const User = require('../models/users.js');
 //
 //
 //
@@ -39,19 +39,19 @@
 //   })
 // })
 
-// users.get('/new', (req, res) => {
-//   res.render('users/new.ejs', {
-//     currentUser: req.session.currentUser
-//   })
-// })
-//
-// users.post('/', (req, res) => {
-//   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-//   req.body.role = 'base'
-//   User.create(req.body, (err, createdUser) => {
-//     console.log('User is created', createdUser);
-//     res.redirect('/toolow')
-//   })
-// })
+users.get('/new', (req, res) => {
+  res.render('users/new.ejs', {
+    currentUser: req.session.currentUser
+  })
+})
 
-// module.exports = users
+users.post('/', (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+  req.body.role = 'base'
+  User.create(req.body, (err, createdUser) => {
+    console.log('User is created', createdUser);
+    res.redirect('/toolow')
+  })
+})
+
+module.exports = users
