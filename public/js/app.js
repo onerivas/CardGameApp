@@ -104,57 +104,55 @@ class App extends React.Component {
                     </div>
                   </div>
                   <div className="img-div">
-                  <img src={post.img} className="post-img" /><br />
+                    <img src={post.img} className="post-img" /><br />
                   </div>
                   <p className="description">{post.description}</p><br />
                     {/*<p>Comments</p>*/}
-                    <div className="line-comments"></div>
-                    <ul className="comment-list">
+                  <div className="line-comments"></div>
+                  <ul className="comment-list">
                     { post.comments.map((comment => { return(
-                      <li key={comment._id} className="post-comment">
-                        <p className="comment">{comment.comment}</p>
-                        <p className="commentName">-{comment.commentName}</p>
-                      </li>
+                    <li key={comment._id} className="post-comment">
+                      <p className="comment">{comment.comment}</p>
+                      <p className="commentName">-{comment.commentName}</p>
+                    </li>
                     )}))}
-                    </ul>
-                    <form id={post._id} onSubmit={this.createComment}>
+                  </ul>
+                  <details>
+                    <summary>Edit this post</summary>
+                    <form id={post._id} onSubmit={this.updatePost}>
                       <label htmlFor="name">Name</label>
                       <br />
-                      <input type="text" id="commentName" defaultValue={post.comments.commentName} onChange={this.handleChange} />
+                      <input type="text" id="name" onChange={this.handleChange} defaultValue={post.name} />
                       <br />
-                      <label htmlFor="comment">Comments</label>
+                      <label htmlFor="location">Location</label>
                       <br />
-                      <input type="text" id="comment" defaultValue={post.comments.comment} onChange={this.handleChange}  />
-                      <input type="submit" value="Add Comment" />
-                    </form>
-                    <details>
-                      <summary>Edit this post</summary>
-                      <form id={post._id} onSubmit={this.updatePost}>
-                        <label htmlFor="name">Name</label>
-                        <br />
-                        <input type="text" id="name" onChange={this.handleChange} defaultValue={post.name} />
-                        <br />
-                        <label htmlFor="location">Location</label>
-                        <br />
-                        <input type="text" id="location" onChange={this.handleChange} defaultValue={post.location} />
-                        <br />
-                        <label htmlFor="img">Image</label>
-                        <br />
-                        <input type="text" id="img" onChange={this.handleChange} defaultValue={post.img} />
-                        <br />
-                        <label htmlFor="description">Description</label>
-                        <br />
-                        <input type="text" id="description" onChange={this.handleChange} defaultValue={post.description} />
-                        <br />
-                        <input type="submit" value="Update Post" />
+                      <input type="text" id="location" onChange={this.handleChange} defaultValue={post.location} />
+                      <br />
+                      <label htmlFor="img">Image</label>
+                      <br />
+                      <input type="text" id="img" onChange={this.handleChange} defaultValue={post.img} />
+                      <br />
+                      <label htmlFor="description">Description</label>
+                      <br />
+                      <input type="text" id="description" onChange={this.handleChange} defaultValue={post.description} />
+                      <br />
+                      <input type="submit" value="Update Post" />
                       </form>
                       <button value={post._id} onClick={this.deletePost}>DELETE</button>
                     </details>
+                    <div className="commentarea-line"></div>
+                    <div className="add-comment-area">
+                      <form id={post._id} onSubmit={this.createComment}>
+                        <input type="text" id="commentName" defaultValue={post.comments.commentName} onChange={this.handleChange} placeholder="name"/>
+                        <input type="text" id="comment" defaultValue={post.comments.comment} onChange={this.handleChange} placeholder="add a comment..."/>
+                        <input type="submit" value="post" className="add-comment"/>
+                      </form>
+                    </div>
                   </li>
                 )}))}
               </ul>
               </div>
-              </div>
+            </div>
         }
 }
 
