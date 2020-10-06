@@ -1,19 +1,12 @@
 class App extends React.Component {
   state = {
-    name: '',
-    location: '',
-    img: '',
-    description: '',
-    comments:[{commentName:'', comment:''}],
     posts: []
   }
   componentDidMount = () => {
     axios.get('/travel').then(
       (response) => {
-        console.log(response.data)
         this.setState({
           posts: response.data
-
       })
     })
   }
@@ -36,10 +29,6 @@ class App extends React.Component {
     axios.post('/travel', this.state).then(
       (response) => {
       this.setState({
-        name: '',
-        location: '',
-        img: '',
-        description: '',
         posts: response.data
       })
     })
@@ -50,14 +39,35 @@ class App extends React.Component {
     axios.put('/travel/' + id, this.state).then(
       (response) => {
       this.setState({
-        posts: response.data,
-        name: '',
-        location: '',
-        img: '',
-        description: '',
-        comments: []
+        posts: response.data
       })
     })
+  }
+  createComment = (event) => {
+    event.preventDefault();
+    event.target.reset();
+    let data =
+      {
+        commentName: this.state.commentName,
+        comment: this.state.comment,
+        postId: event.target.id
+      }
+    axios.post('/travel/comments', data).then(
+      (response) => {
+      let postIndex;
+        for (let i = 0; i < this.state.posts.length; i++) {
+          let post = this.state.posts[i]
+          if(post._id === response.data._id){
+            postIndex = i
+          }
+        }
+        this.setState(
+          (state) => {
+            state.posts[postIndex] = response.data
+            return state
+        })
+      }
+    )
   }
   render = () => {
     return  <div>
@@ -89,16 +99,16 @@ class App extends React.Component {
                   {post.location}<br />
                   <img src={post.img}/><br />
                   {post.description}<br />
-
                     <p>Comments</p>
+                    <ul>
                     { post.comments.map((comment => { return(
-                      <li key={post._id}>
+                      <li key={comment._id}>
                       {comment.commentName}<br />
                       {comment.comment}<br />
                       </li>
                     )}))}
-
-                    <form id={post._id} onSubmit={this.updatePost}>
+                    </ul>
+                    <form id={post._id} onSubmit={this.createComment}>
                       <label htmlFor="name">Name</label>
                       <br />
                       <input type="text" id="commentName" defaultValue={post.comments.commentName} onChange={this.handleChange} />

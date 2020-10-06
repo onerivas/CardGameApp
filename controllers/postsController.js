@@ -9,13 +9,15 @@ posts.get('/', (req, res) => {
   })
 })
 
-// posts.post('/:id', (req, res) => {
-//   Comment.create(req.body, (err, createPost) => {
-//     Comment.find({ postId: req.params.id }, (err, foundComment) => {
-//       res.json(foundComment)
-//     })
-//   })
-// })
+posts.post('/comments', (req, res) => {
+  Comment.create(req.body, (err, createdComment) => {
+    Post.findById(req.body.postId, (err, foundPost) => {
+      foundPost.comments.push(createdComment)
+      foundPost.save()
+      res.json(foundPost)
+    })
+  })
+})
 
 posts.post('/', (req, res) => {
   const newBody = {
