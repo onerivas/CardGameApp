@@ -1,10 +1,7 @@
 const express = require('express');
 const posts = express.Router();
 const Post = require('../models/posts.js');
-
-// const isAuthorized = (req, res, next) => {
-//   req.session.currentUser ? next() : res.redirect('/sessions/new')
-// }
+const Comment = require('../models/comments.js')
 
 posts.get('/', (req, res) => {
   Post.find({}, (err, foundPost) => {
@@ -12,8 +9,24 @@ posts.get('/', (req, res) => {
   })
 })
 
+// posts.post('/:id', (req, res) => {
+//   Comment.create(req.body, (err, createPost) => {
+//     Comment.find({ postId: req.params.id }, (err, foundComment) => {
+//       res.json(foundComment)
+//     })
+//   })
+// })
+
 posts.post('/', (req, res) => {
-  Post.create(req.body, (err, createPost) => {
+  const newBody = {
+    name:req.body.name,
+    location: req.body.location,
+    img: req.body.img,
+    description: req.body.description,
+    comments:[]
+  }
+  Post.create(newBody, (err, createPost) => {
+    console.log(newBody);
     Post.find({}, (err, foundPost) => {
       res.json(foundPost)
     })
@@ -21,7 +34,18 @@ posts.post('/', (req, res) => {
 })
 
 posts.put('/:id', (req, res) => {
+  for (let key of req.body.posts) {
+    if (req.params.id === key._id) {
+      for (let key2 in key) {
+        // console.log(req.body[key2]);
+        if (!req.body[key2]) {
+          req.body[key2] = key[key2];
+        }
+      }
+    }
+  }
   Post.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedPost) => {
+    console.log(updatedPost);
     if(err){
       res.send(err)
     } else {
