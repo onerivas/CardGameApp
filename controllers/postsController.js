@@ -28,7 +28,6 @@ posts.post('/', (req, res) => {
     comments:[]
   }
   Post.create(newBody, (err, createPost) => {
-    console.log(newBody);
     Post.find({}, (err, foundPost) => {
       res.json(foundPost)
     })

@@ -91,20 +91,29 @@ class App extends React.Component {
                 <br />
                 <input type="submit" value="Create Post" />
               </form>
-              <h3>Posts</h3>
-              <ul>
+              <div className="posts-container">
+              <ul className="posts-list">
                 { this.state.posts.map((post => { return(
-                  <li key={post._id}>
-                  {post.name}<br />
-                  {post.location}<br />
-                  <img src={post.img}/><br />
-                  {post.description}<br />
-                    <p>Comments</p>
-                    <ul>
+                  <li key={post._id} className="post">
+                  <div className="post-title">
+                    <div className="author">
+                      <h4 className="post-author">{post.name}</h4><br />
+                    </div>
+                    <div className="location">
+                      <h5 className="post-location">{post.location}</h5><br />
+                    </div>
+                  </div>
+                  <div className="img-div">
+                  <img src={post.img} className="post-img" /><br />
+                  </div>
+                  <p className="description">{post.description}</p><br />
+                    {/*<p>Comments</p>*/}
+                    <div className="line-comments"></div>
+                    <ul className="comment-list">
                     { post.comments.map((comment => { return(
-                      <li key={comment._id}>
-                      {comment.commentName}<br />
-                      {comment.comment}<br />
+                      <li key={comment._id} className="post-comment">
+                        <p className="comment">{comment.comment}</p>
+                        <p className="commentName">-{comment.commentName}</p>
                       </li>
                     )}))}
                     </ul>
@@ -131,7 +140,7 @@ class App extends React.Component {
                         <br />
                         <label htmlFor="img">Image</label>
                         <br />
-                        <input type="text" id="img" onChange={this.handleChange} value={post.img} />
+                        <input type="text" id="img" onChange={this.handleChange} defaultValue={post.img} />
                         <br />
                         <label htmlFor="description">Description</label>
                         <br />
@@ -144,6 +153,7 @@ class App extends React.Component {
                   </li>
                 )}))}
               </ul>
+              </div>
               </div>
         }
 }
