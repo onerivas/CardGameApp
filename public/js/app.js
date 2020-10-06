@@ -1,18 +1,19 @@
 class App extends React.Component {
   state = {
     name: '',
-    commentName: '',
     location: '',
     img: '',
     description: '',
-    posts: [],
-    comments: []
+    comments:[{commentName:'', comment:''}],
+    posts: []
   }
   componentDidMount = () => {
     axios.get('/travel').then(
       (response) => {
+        console.log(response.data)
         this.setState({
           posts: response.data
+
       })
     })
   }
@@ -53,7 +54,8 @@ class App extends React.Component {
         name: '',
         location: '',
         img: '',
-        description: ''
+        description: '',
+        comments: []
       })
     })
   }
@@ -81,25 +83,31 @@ class App extends React.Component {
               </form>
               <h3>Posts</h3>
               <ul>
-                { this.state.posts.map((post) => { return(
+                { this.state.posts.map((post => { return(
                   <li key={post._id}>
                   {post.name}<br />
                   {post.location}<br />
                   <img src={post.img}/><br />
                   {post.description}<br />
-                  <div className="comments">
+
                     <p>Comments</p>
+                    { post.comments.map((comment => { return(
+                      <li key={post._id}>
+                      {comment.commentName}<br />
+                      {comment.comment}<br />
+                      </li>
+                    )}))}
+
                     <form id={post._id} onSubmit={this.updatePost}>
-                      <label htmlFor="commentName">Name</label>
+                      <label htmlFor="name">Name</label>
                       <br />
-                      <input type="text" id="commentName" onChange={this.handleChange} value={this.state.commentName} />
+                      <input type="text" id="commentName" defaultValue={post.comments.commentName} onChange={this.handleChange} />
                       <br />
                       <label htmlFor="comment">Comments</label>
                       <br />
-                      <input type="text" id="comment" onChange={this.handleChange} value={this.state.comment} />
+                      <input type="text" id="comment" defaultValue={post.comments.comment} onChange={this.handleChange}  />
                       <input type="submit" value="Add Comment" />
                     </form>
-                  </div>
                     <details>
                       <summary>Edit this post</summary>
                       <form id={post._id} onSubmit={this.updatePost}>
@@ -121,10 +129,10 @@ class App extends React.Component {
                         <br />
                         <input type="submit" value="Update Post" />
                       </form>
+                      <button value={post._id} onClick={this.deletePost}>DELETE</button>
                     </details>
-                  <button value={post._id} onClick={this.deletePost}>DELETE</button>
                   </li>
-                )})}
+                )}))}
               </ul>
               </div>
         }

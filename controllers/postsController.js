@@ -18,7 +18,15 @@ posts.get('/', (req, res) => {
 // })
 
 posts.post('/', (req, res) => {
-  Post.create(req.body, (err, createPost) => {
+  const newBody = {
+    name:req.body.name,
+    location: req.body.location,
+    img: req.body.img,
+    description: req.body.description,
+    comments:[]
+  }
+  Post.create(newBody, (err, createPost) => {
+    console.log(newBody);
     Post.find({}, (err, foundPost) => {
       res.json(foundPost)
     })
@@ -37,6 +45,7 @@ posts.put('/:id', (req, res) => {
     }
   }
   Post.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedPost) => {
+    console.log(updatedPost);
     if(err){
       res.send(err)
     } else {
