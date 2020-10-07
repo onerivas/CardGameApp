@@ -161,20 +161,96 @@ body {
 /* ========== */
 
 summary {
-  font-size: .7em;
+  font-size: .9em;
   style: none;
+  margin-left: 12px;
+  margin-bottom: 10px;
 }
 
 .appName {
   font-family: 'Sansita Swashed', cursive;
   text-align: center;
-  font-size: 14vw;
+  font-size: 12vw;
 }
-.create{
+.create {
   text-align: center;
   margin: 1em;
 }
 
-input[type=text]{
-  width: 60%;
+.add-post {
+  font-family: 'Sansita Swashed', cursive;
+  margin-bottom: 10px;
+}
+
+.post-input {
+  width: 40%;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-family: 'Syne', sans-serif;
+}
+
+.post-input-description {
+  resize: none;
+  width: 40%;
+  height: 40px;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-family: 'Syne', sans-serif;
+}
+
+.add {
+  padding: 5px;
+  font-family: 'Syne', sans-serif;
+  border: 1px solid #5d5a60;
+  border-radius: 3px;
+  background-color: white;
+  text-transform: lowercase;
+  transition: 0.3s all;
+}
+
+.add:hover {
+  background-color: #92bbbd;
+}
+
+.post-input2 {
+  width: 40%;
+  padding: 5px;
+  margin-bottom: 7px;
+  margin-left: 12px;
+  font-family: 'Syne', sans-serif;
+}
+
+.post-input-description2 {
+  resize: none;
+  width: 40%;
+  height: 40px;
+  padding: 5px;
+  margin-left: 12px;
+  margin-bottom: 7px;
+  font-family: 'Syne', sans-serif;
+}
+
+.edit-label {
+  font-family: 'Syne', sans-serif;
+  margin-left: 12px;
+}
+
+.edit-btn, .delete-btn {
+  padding: 3px;
+  font-family: 'Syne', sans-serif;
+  border: 1px solid #5d5a60;
+  border-radius: 3px;
+  margin-left: 12px;
+  margin-bottom: 5px;
+  background-color: white;
+  text-transform: lowercase;
+  transition: 0.3s all;
+}
+
+.edit-btn:hover {
+  background-color: #457b9d;
+}
+
+.delete-btn:hover {
+  background-color: #d62828;
 }

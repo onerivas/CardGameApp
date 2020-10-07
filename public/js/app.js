@@ -89,27 +89,27 @@ class App extends React.Component {
                   </div>
                   <p className="description">{post.description}</p><br />
                   <details>
-                    <summary>Edit this post</summary>
+                    <summary>edit</summary>
                     <form id={post._id} onSubmit={this.updatePost}>
-                      <label htmlFor="name">Name</label>
+                      <label htmlFor="name" className="edit-label">Name</label>
                       <br />
-                      <input type="text" id="name" onChange={this.handleChange} defaultValue={post.name} />
+                      <input type="text" id="name" onChange={this.handleChange} defaultValue={post.name} className="post-input2"/>
                       <br />
-                      <label htmlFor="location">Location</label>
+                      <label htmlFor="location" className="edit-label">Location</label>
                       <br />
-                      <input type="text" id="location" onChange={this.handleChange} defaultValue={post.location} />
+                      <input type="text" id="location" onChange={this.handleChange} defaultValue={post.location} className="post-input2"/>
                       <br />
-                      <label htmlFor="img">Image</label>
+                      <label htmlFor="img" className="edit-label">Image</label>
                       <br />
-                      <input type="text" id="img" onChange={this.handleChange} defaultValue={post.img} />
+                      <input type="text" id="img" onChange={this.handleChange} defaultValue={post.img} className="post-input2"/>
                       <br />
-                      <label htmlFor="description">Description</label>
+                      <label htmlFor="description" className="edit-label">Description</label>
                       <br />
-                      <input type="text" id="description" onChange={this.handleChange} defaultValue={post.description} />
+                      <textarea id="description" onChange={this.handleChange} defaultValue={post.description} className="post-input-description2"/>
                       <br />
-                      <input type="submit" value="Update Post" />
+                      <input type="submit" value="Update Post" className="edit-btn"/>
                       </form>
-                      <button value={post._id} onClick={this.deletePost}>DELETE</button>
+                      <button value={post._id} onClick={this.deletePost} className="delete-btn">DELETE</button>
                     </details>
                     {/*<p>Comments</p>*/}
                   <div className="line-comments"></div>
@@ -135,26 +135,19 @@ class App extends React.Component {
                 )}))}
               </ul>
               </div>
-              <div className='create'>
-                <h2>Create Post</h2>
+              <div className="create">
+                <h2 className="add-post">Add Post</h2>
                 <form className="createForm" onSubmit={this.handleSubmit}>
-                  <label htmlFor="name">Name</label>
+                  <input type="text" id="name" onChange={this.handleChange} className="post-input" placeholder="name"/>
                   <br />
-                  <input type="text" id="name" onChange={this.handleChange}/>
+                  <input type="text" id="location" onChange={this.handleChange} className="post-input" placeholder="location"/>
                   <br />
-                  <label htmlFor="location">Location</label>
+                  <input type="text" id="img" onChange={this.handleChange} className="post-input" placeholder="image"/>
                   <br />
-                  <input type="text" id="location" onChange={this.handleChange}/>
+                  <textarea id="description" onChange={this.handleChange} className="post-input-description"
+                  placeholder="description"/>
                   <br />
-                  <label htmlFor="img">Image</label>
-                  <br />
-                  <input type="text" id="img" onChange={this.handleChange}/>
-                  <br />
-                  <label htmlFor="description">Description</label>
-                  <br />
-                  <input type="text" id="description" onChange={this.handleChange}/>
-                  <br />
-                  <input type="submit" value="Create Post" />
+                  <input type="submit" value="Add Post" className="add"/>
                 </form>
                 </div>
             </div>
