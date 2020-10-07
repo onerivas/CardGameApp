@@ -71,26 +71,7 @@ class App extends React.Component {
   }
   render = () => {
     return  <div>
-              <h2>Create Post</h2>
-              <form onSubmit={this.handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <br />
-                <input type="text" id="name" onChange={this.handleChange}/>
-                <br />
-                <label htmlFor="location">Location</label>
-                <br />
-                <input type="text" id="location" onChange={this.handleChange}/>
-                <br />
-                <label htmlFor="img">Image</label>
-                <br />
-                <input type="text" id="img" onChange={this.handleChange}/>
-                <br />
-                <label htmlFor="description">Description</label>
-                <br />
-                <input type="text" id="description" onChange={this.handleChange}/>
-                <br />
-                <input type="submit" value="Create Post" />
-              </form>
+
               <div className="posts-container">
               <ul className="posts-list">
                 { this.state.posts.map((post => { return(
@@ -107,16 +88,6 @@ class App extends React.Component {
                     <img src={post.img} className="post-img" /><br />
                   </div>
                   <p className="description">{post.description}</p><br />
-                    {/*<p>Comments</p>*/}
-                  <div className="line-comments"></div>
-                  <ul className="comment-list">
-                    { post.comments.map((comment => { return(
-                    <li key={comment._id} className="post-comment">
-                      <p className="comment">{comment.comment}</p>
-                      <p className="commentName">-{comment.commentName}</p>
-                    </li>
-                    )}))}
-                  </ul>
                   <details>
                     <summary>Edit this post</summary>
                     <form id={post._id} onSubmit={this.updatePost}>
@@ -140,6 +111,18 @@ class App extends React.Component {
                       </form>
                       <button value={post._id} onClick={this.deletePost}>DELETE</button>
                     </details>
+                    {/*<p>Comments</p>*/}
+                  <div className="line-comments"></div>
+                  <ul className="comment-list">
+                    { post.comments.map((comment => { return(
+                    <li key={comment._id} className="post-comment">
+                      <p className="comment">{comment.comment}</p>
+                      <p className="commentName">-{comment.commentName}</p>
+
+                    </li>
+                    )}))}
+                  </ul>
+
                     <div className="commentarea-line"></div>
                     <div className="add-comment-area">
                       <form id={post._id} onSubmit={this.createComment}>
@@ -152,6 +135,28 @@ class App extends React.Component {
                 )}))}
               </ul>
               </div>
+              <div className='create'>
+                <h2>Create Post</h2>
+                <form className="createForm" onSubmit={this.handleSubmit}>
+                  <label htmlFor="name">Name</label>
+                  <br />
+                  <input type="text" id="name" onChange={this.handleChange}/>
+                  <br />
+                  <label htmlFor="location">Location</label>
+                  <br />
+                  <input type="text" id="location" onChange={this.handleChange}/>
+                  <br />
+                  <label htmlFor="img">Image</label>
+                  <br />
+                  <input type="text" id="img" onChange={this.handleChange}/>
+                  <br />
+                  <label htmlFor="description">Description</label>
+                  <br />
+                  <input type="text" id="description" onChange={this.handleChange}/>
+                  <br />
+                  <input type="submit" value="Create Post" />
+                </form>
+                </div>
             </div>
         }
 }
