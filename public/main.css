@@ -15,6 +15,7 @@ body {
   background-color: #2c2e2f;
   color: white;
   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(https://images.pexels.com/photos/2362004/pexels-photo-2362004.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
+  background-attachment: fixed;
 }
 
 /* =====POSTS===== */
@@ -60,7 +61,7 @@ body {
 .posts-list {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column-reverse;
 }
 
 .post {
@@ -160,7 +161,7 @@ body {
 }
 /* ========== */
 
-summary {
+.edit-label {
   font-size: .9em;
   style: none;
   margin-left: 12px;
@@ -172,6 +173,7 @@ summary {
   text-align: center;
   font-size: 12vw;
 }
+
 .create {
   text-align: center;
   margin: 1em;
@@ -180,6 +182,7 @@ summary {
 .add-post {
   font-family: 'Sansita Swashed', cursive;
   margin-bottom: 10px;
+  font-size: 20px;
 }
 
 .post-input {
@@ -254,3 +257,15 @@ summary {
 .delete-btn:hover {
   background-color: #d62828;
 }
+
+/* =====FOOTER===== */
+footer {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.by-us {
+  font-family: 'Vollkorn SC', serif;
+}
+/* ========== */

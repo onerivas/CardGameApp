@@ -46,7 +46,6 @@ posts.put('/:id', (req, res) => {
     }
   }
   Post.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedPost) => {
-    console.log(updatedPost);
     if(err){
       res.send(err)
     } else {

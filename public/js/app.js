@@ -71,7 +71,23 @@ class App extends React.Component {
   }
   render = () => {
     return  <div>
-
+              <div className="create">
+              <details>
+                <summary className="add-post">Add Post</summary>
+                <form className="createForm" onSubmit={this.handleSubmit}>
+                  <input type="text" id="name" onChange={this.handleChange} className="post-input" placeholder="name"/>
+                  <br />
+                  <input type="text" id="location" onChange={this.handleChange} className="post-input" placeholder="location"/>
+                  <br />
+                  <input type="text" id="img" onChange={this.handleChange} className="post-input" placeholder="image"/>
+                  <br />
+                  <textarea id="description" onChange={this.handleChange} className="post-input-description"
+                  placeholder="description"/>
+                  <br />
+                  <input type="submit" value="Add Post" className="add"/>
+                </form>
+              </details>
+              </div>
               <div className="posts-container">
               <ul className="posts-list">
                 { this.state.posts.map((post => { return(
@@ -89,7 +105,7 @@ class App extends React.Component {
                   </div>
                   <p className="description">{post.description}</p><br />
                   <details>
-                    <summary>edit</summary>
+                    <summary className="edit-label">edit</summary>
                     <form id={post._id} onSubmit={this.updatePost}>
                       <label htmlFor="name" className="edit-label">Name</label>
                       <br />
@@ -118,11 +134,9 @@ class App extends React.Component {
                     <li key={comment._id} className="post-comment">
                       <p className="comment">{comment.comment}</p>
                       <p className="commentName">-{comment.commentName}</p>
-
                     </li>
                     )}))}
                   </ul>
-
                     <div className="commentarea-line"></div>
                     <div className="add-comment-area">
                       <form id={post._id} onSubmit={this.createComment}>
@@ -135,21 +149,6 @@ class App extends React.Component {
                 )}))}
               </ul>
               </div>
-              <div className="create">
-                <h2 className="add-post">Add Post</h2>
-                <form className="createForm" onSubmit={this.handleSubmit}>
-                  <input type="text" id="name" onChange={this.handleChange} className="post-input" placeholder="name"/>
-                  <br />
-                  <input type="text" id="location" onChange={this.handleChange} className="post-input" placeholder="location"/>
-                  <br />
-                  <input type="text" id="img" onChange={this.handleChange} className="post-input" placeholder="image"/>
-                  <br />
-                  <textarea id="description" onChange={this.handleChange} className="post-input-description"
-                  placeholder="description"/>
-                  <br />
-                  <input type="submit" value="Add Post" className="add"/>
-                </form>
-                </div>
             </div>
         }
 }
