@@ -5,6 +5,7 @@
 This app serves as a way for a user to create a travel blog that details some of the places they've been and allow people to see and post comments about it. The idea originally started as a way for someone and their friends to be able to all post their travel plans and interact with each other on a centralized hub. This is the first step towards achieving that.
 
 ## Link to Live Site
+https://travel-gram-app.herokuapp.com/
 
 ## Installation Instructions
 
