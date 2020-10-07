@@ -14,6 +14,7 @@ font-family: 'Vollkorn SC', serif;
 body {
   background-color: #2c2e2f;
   color: white;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(https://images.pexels.com/photos/2362004/pexels-photo-2362004.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
 }
 
 /* =====POSTS===== */
@@ -99,7 +100,7 @@ body {
 
 .comment-list {
   list-style: none;
-  margin: 20px 0px 25px 15px;
+  margin: 20px 15px 25px 15px;
 }
 
 .post-comment {
@@ -107,6 +108,8 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 8px;
+  border-bottom: 1px solid gray;
+  padding: .2em;
 }
 
 .commentName {
@@ -118,6 +121,7 @@ body {
 
 .comment {
   font-family: 'Syne', sans-serif;
+  width: 75%;
 }
 
 .add-comment-area {
@@ -155,3 +159,22 @@ body {
   color: #cccad2;
 }
 /* ========== */
+
+summary {
+  font-size: .7em;
+  style: none;
+}
+
+.appName {
+  font-family: 'Sansita Swashed', cursive;
+  text-align: center;
+  font-size: 14vw;
+}
+.create{
+  text-align: center;
+  margin: 1em;
+}
+
+input[type=text]{
+  width: 60%;
+}
